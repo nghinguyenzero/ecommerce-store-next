@@ -49,9 +49,8 @@ export default function CommonModal({
                                         </div>
                                         {
                                             showButtons ? 
-                                            <div className="border-t border-gray-300 px-4 py-6 sm:px-6">
+                                            <div className="border-none px-4 py-6 sm:px-6">
                                                 {buttonComponent}
-
                                             </div> : null
                                         }
                                     </div>
