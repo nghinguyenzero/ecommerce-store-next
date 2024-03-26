@@ -6,6 +6,7 @@ import { useContext, useState } from "react";
 import { registerNewUser } from "../services/register";
 import ComponentLevelLoader from "@/components/Loader/ComponentLevelLoader";
 import { GlobalContext } from "@/context";
+import { toast } from "react-toastify";
 
 const isRegistered = false;
 const initialState = {
@@ -26,12 +27,33 @@ export default function Register(props) {
     && formData.password && formData.password.trim() !== '' ? true : false
   }
   console.log({isFormValid: isFormValid() });
-  
+
   async function handleRegisterOnSubmit () {
-    const data = await registerNewUser(formData)
-    console.log({data});
+    setPageLevelLoader(true);
+    const data = await registerNewUser(formData);
+
+    if (data.success) {
+      toast.success(data.message, {
+        position: toast.POSITION.TOP_RIGHT,
+      });
+      setIsRegistered(true);
+      setPageLevelLoader(false);
+      setFormData(initialFormData);
+    } else {
+      toast.error(data.message, {
+        position: toast.POSITION.TOP_RIGHT,
+      });
+      setPageLevelLoader(false);
+      setFormData(initialFormData);
+    }
+
+    console.log(data);
 
   }
+
+  useEffect(() =>{
+    if(isAuthUser)router.push('/')
+   }, [isAuthUser])
   
   return (
     <div className="bg-white relative">

@@ -7,6 +7,8 @@ import { login } from "../services/login";
 import { GlobalContext } from "@/context";
 import Cookies from "js-cookie";
 import ComponentLevelLoader from "@/components/Loader/ComponentLevelLoader";
+import Notification from "@/components/Notification";
+import { toast } from "react-toastify";
 
 const initFormData = {
   email: "",
@@ -35,6 +37,9 @@ export default function Login() {
     const res = await login(formData)
     console.log({res});
     if(res.success) {
+        toast.success(res.message, {
+          position: toast.POSITION.TOP_RIGHT,
+        });
         setIsAuthUser(true)
         setUser(res?.finalData?.user)
         setFormData(initFormData)
@@ -43,6 +48,9 @@ export default function Login() {
         setComponentLeverLoader({loading: false, id: ''})
 
     }else {
+      toast.error(res.message, {
+        position: toast.POSITION.TOP_RIGHT,
+      });
       setIsAuthUser(false)
       setComponentLeverLoader({loading: false, id: ''})
     }
