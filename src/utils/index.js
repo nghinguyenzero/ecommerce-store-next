@@ -194,3 +194,17 @@ export const adminAddProductformControls = [
       label : 'L'
     }
   ]
+
+  export const firebaseConfig = {
+    apiKey: "AIzaSyDTcxtXyJInpkqH1uzFICNKX6hEajgytGo",
+    authDomain: "ecommerce-store-909d1.firebaseapp.com",
+    projectId: "ecommerce-store-909d1",
+    storageBucket: "ecommerce-store-909d1.appspot.com",
+    messagingSenderId: "529887896637",
+    appId: "1:529887896637:web:4e6c3c1d03a6327b417654",
+    measurementId: "G-FJC4BZRW1J"
+  };
+  
+  export const firebaseStorageURL = 'gs://ecommerce-store-909d1.appspot.com'
+
+  
