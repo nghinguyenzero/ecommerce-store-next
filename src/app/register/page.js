@@ -2,19 +2,23 @@
 import InputComponent from "@/components/FormElements/InputComponent";
 import SelectComponent from "@/components/FormElements/SelectComponent";
 import { registrationFormControls } from "@/utils";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { registerNewUser } from "../services/register";
+import ComponentLevelLoader from "@/components/Loader/ComponentLevelLoader";
+import { GlobalContext } from "@/context";
 
 const isRegistered = false;
 const initialState = {
   name: "",
   email: "",
   password: "",
-  role: "",
+  role: "customer",
 };
 export default function Register(props) {
   const [formData, setFormData] = useState(initialState);
   console.log({formData});
+  const [isRegistered, setIsRegistered] = useState(false);
+  const { pageLevelLoader, setPageLevelLoader , isAuthUser } = useContext(GlobalContext);
 
   function isFormValid() {
     return formData && formData.name &&formData.name.trim() !== ''
@@ -22,6 +26,7 @@ export default function Register(props) {
     && formData.password && formData.password.trim() !== '' ? true : false
   }
   console.log({isFormValid: isFormValid() });
+  
   async function handleRegisterOnSubmit () {
     const data = await registerNewUser(formData)
     console.log({data});
@@ -88,7 +93,15 @@ export default function Register(props) {
                                 disabled={!isFormValid()}
                                 onClick={handleRegisterOnSubmit}
                   >
-                    Register
+                      {pageLevelLoader ? (
+                      <ComponentLevelLoader
+                        text={"Registering"}
+                        color={"#ffffff"}
+                        loading={pageLevelLoader}
+                      />
+                    ) : (
+                      "Register"
+                    )}
                   </button>
                 </div>
               )}

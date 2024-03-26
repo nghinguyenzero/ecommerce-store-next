@@ -29,7 +29,7 @@ const configOptions = {
 };
 
 const connectToDB = async () => {
-  const connectionUrl = url1
+  const connectionUrl = url2
 
   mongoose
     .connect(connectionUrl, configOptions)

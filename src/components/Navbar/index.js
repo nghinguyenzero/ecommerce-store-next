@@ -4,13 +4,11 @@ import { GlobalContext } from "@/context"
 import { adminNavOptions, navOptions, styles } from "@/utils"
 import { Fragment, useContext } from "react"
 import CommonModal from "../CommonModal"
+import Cookies from "js-cookie"
+import { useRouter } from "next/navigation"
 
 
 const isAdminView = false
-const isAuthUser = false
-const user = {
-    role: 'admin'
-}
 
 function NavItems({ isModalView  = false }) {
     return (
@@ -40,8 +38,21 @@ function NavItems({ isModalView  = false }) {
 
 
 export default function Navbar() {
-    const {showNavModal, setShowNavModal} = useContext(GlobalContext)
+    const {
+        showNavModal, setShowNavModal, user, setUser, isAuthUser, setIsAuthUser
+    } = useContext(GlobalContext)
 
+    const router = useRouter()
+
+    function handleLogout() {
+        setIsAuthUser(false)
+        setUser(null)
+        Cookies.remove('token')
+        localStorage.clear()
+        router.push('/')
+    }
+
+console.log(user, isAuthUser, 'narbar');
     return <>
     <nav className="bg-white fixed w-full  z-20 top-0 left-0 border-b border-gray-200">
         <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
@@ -62,16 +73,15 @@ export default function Navbar() {
                     ? isAdminView ?<button className={styles.button}>Client view</button> : <button className={styles.button}>Admin view</button>
                     : null
                 } 
-                {  isAuthUser? <button className={styles.button}>Logout</button> : <button className={styles.button}>Login</button> }
-
-                {/* <button
-                onClick={() => router.push("/login")}
-                className={
-                  "mt-1.5 inline-block bg-black px-5 py-3 text-xs font-medium upprcase tracking-wide text-white"
-                }
-              >
-                Login
-              </button> */}
+                {  isAuthUser? <button 
+                    onClick={handleLogout}
+                    className={styles.button}
+                
+                >
+                    Logout
+                    </button> : <button
+                    onClick={()=> router.push('/login')}
+                    className={styles.button}>Login</button> }
 
 
               <button
