@@ -2,21 +2,20 @@
 import InputComponent from "@/components/FormElements/InputComponent";
 import SelectComponent from "@/components/FormElements/SelectComponent";
 import { registrationFormControls } from "@/utils";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { registerNewUser } from "../services/register";
 import ComponentLevelLoader from "@/components/Loader/ComponentLevelLoader";
 import { GlobalContext } from "@/context";
 import { toast } from "react-toastify";
 
-const isRegistered = false;
-const initialState = {
+const initialFormData = {
   name: "",
   email: "",
   password: "",
   role: "customer",
 };
 export default function Register(props) {
-  const [formData, setFormData] = useState(initialState);
+  const [formData, setFormData] = useState(initialFormData);
   console.log({formData});
   const [isRegistered, setIsRegistered] = useState(false);
   const { pageLevelLoader, setPageLevelLoader , isAuthUser } = useContext(GlobalContext);

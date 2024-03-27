@@ -21,7 +21,7 @@ export default function Login() {
   const {
     isAuthUser, setIsAuthUser,
     user, setUser,
-    componentLeverLoader, setComponentLeverLoader
+    componentLevelLoader, setComponentLevelLoader
   } = useContext(GlobalContext)
   const router = useRouter();
   console.log({ formData });
@@ -33,7 +33,7 @@ export default function Login() {
   }
 
   async function handleLogin() {
-    setComponentLeverLoader({loading: true, id: ''})
+    setComponentLevelLoader({loading: true, id: ''})
     const res = await login(formData)
     console.log({res});
     if(res.success) {
@@ -45,14 +45,14 @@ export default function Login() {
         setFormData(initFormData)
         Cookies.set('token', res?.finalData?.token)
         localStorage.setItem('user', JSON.stringify(res?.finalData?.user))
-        setComponentLeverLoader({loading: false, id: ''})
+        setComponentLevelLoader({loading: false, id: ''})
 
     }else {
       toast.error(res.message, {
         position: toast.POSITION.TOP_RIGHT,
       });
       setIsAuthUser(false)
-      setComponentLeverLoader({loading: false, id: ''})
+      setComponentLevelLoader({loading: false, id: ''})
     }
   }
 
@@ -100,11 +100,11 @@ export default function Login() {
                   onClick={handleLogin}
                 >
                   {
-                    componentLeverLoader && componentLeverLoader.loading 
+                    componentLevelLoader && componentLevelLoader.loading 
                     ? <ComponentLevelLoader
                       text={"Login in"}
                       color={"#ffffff"}
-                      loading={componentLeverLoader && componentLeverLoader.loading}
+                      loading={componentLevelLoader && componentLevelLoader.loading}
                     /> : 'Login'
                   }
                 </button>

@@ -1,7 +1,11 @@
-export default function AdminAllProducts() {
+import { getAllAdminProducts } from "@/app/services/product";
+import CommListing from "@/components/CommonListing";
+
+export default async function AdminAllProducts() {
+    const allAdminProducts = await getAllAdminProducts()
     return ( 
-    <div>
-        Admin view - AdminAllProducts
-    </div>
+        <CommListing 
+            data={allAdminProducts && allAdminProducts.data}
+        />
     );
 }
