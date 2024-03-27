@@ -2,7 +2,7 @@
 
 import { GlobalContext } from "@/context"
 import { adminNavOptions, navOptions, styles } from "@/utils"
-import { Fragment, useContext } from "react"
+import { Fragment, useContext, useEffect } from "react"
 import CommonModal from "../CommonModal"
 import Cookies from "js-cookie"
 import { usePathname, useRouter } from "next/navigation"
@@ -43,7 +43,10 @@ function NavItems({ isModalView  = false , isAdminView, router}) {
 
 export default function Navbar() {
     const {
-        showNavModal, setShowNavModal, user, setUser, isAuthUser, setIsAuthUser
+        showNavModal, setShowNavModal, 
+        user, setUser, 
+        isAuthUser, setIsAuthUser,
+        currentUpdatedProduct, setCurrentUpdatedProduct
     } = useContext(GlobalContext)
 
     const pathName = usePathname()
@@ -51,6 +54,13 @@ export default function Navbar() {
 
     console.log(pathName);
     console.log(user, isAuthUser, 'narbar');
+
+    useEffect(()=>{
+        if(pathName!== '/admin-view/add-product' 
+        && currentUpdatedProduct !== null) {
+            setCurrentUpdatedProduct(null)
+        }
+    }, [pathName])
 
     function handleLogout() {
         setIsAuthUser(false)
@@ -121,9 +131,9 @@ export default function Navbar() {
                 xmlns="http://www.w3.org/2000/svg"
               >
                 <path
-                  fill-rule="evenodd"
+                  fillRule="evenodd"
                   d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
-                  clip-rule="evenodd"
+                  clipRule="evenodd"
                 ></path>
               </svg>
               </button>
