@@ -3,7 +3,7 @@ import InputComponent from "@/components/FormElements/InputComponent";
 import { loginFormControls } from "@/utils";
 import { useRouter } from "next/navigation";
 import { useContext, useEffect, useState } from "react";
-import { login } from "../services/login";
+import { login } from "@/services/login";
 import { GlobalContext } from "@/context";
 import Cookies from "js-cookie";
 import ComponentLevelLoader from "@/components/Loader/ComponentLevelLoader";

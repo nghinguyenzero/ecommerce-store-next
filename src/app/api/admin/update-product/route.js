@@ -1,132 +1,71 @@
 import connectToDB from "@/database";
-
+import AuthUser from "@/middleware/AuthUser";
 import Product from "@/models/product";
-
-import { revalidatePath, revalidateTag } from "next/cache";
-
 import { NextResponse } from "next/server";
-
-
-
 
 export const dynamic = "force-dynamic";
 
-
-
-
 export async function PUT(req) {
-
   try {
-
     await connectToDB();
 
-    const extractData = await req.json();
+    const isAuthUser = await AuthUser(req);
 
-
-
-
-    const {
-
-      _id,
-
-      name,
-
-      price,
-
-      description,
-
-      category,
-
-      sizes,
-
-      deliveryInfo,
-
-      onSale,
-
-      priceDrop,
-
-      imageUrl,
-
-    } = extractData;
-
-
-
-
-    const updatedProduct = await Product.findOneAndUpdate(
-
-      {
-
-        _id: _id,
-
-      },
-
-      {
-
+    if (isAuthUser?.role === "admin") {
+      const extractData = await req.json();
+      const {
+        _id,
         name,
-
         price,
-
         description,
-
         category,
-
         sizes,
-
         deliveryInfo,
-
         onSale,
-
         priceDrop,
-
         imageUrl,
+      } = extractData;
 
-      },
+      const updatedProduct = await Product.findOneAndUpdate(
+        {
+          _id: _id,
+        },
+        {
+          name,
+          price,
+          description,
+          category,
+          sizes,
+          deliveryInfo,
+          onSale,
+          priceDrop,
+          imageUrl,
+        },
+        { new: true }
+      );
 
-      { new: true }
-
-    );
-
-
-
-
-    if (updatedProduct) {
-
-      const extractPathToRevalidate  = req.nextUrl.searchParams.get('tag')
-
-      revalidateTag(extractPathToRevalidate)
-
-      return NextResponse.json({
-
-        success: true,
-
-        message: "Product updated successfully",
-
-      });
-
+      if (updatedProduct) {
+        return NextResponse.json({
+          success: true,
+          message: "Product updated successfully",
+        });
+      } else {
+        return NextResponse.json({
+          success: false,
+          message: "Failed to update the product ! Please try again later",
+        });
+      }
     } else {
-
       return NextResponse.json({
-
         success: false,
-
-        message: "Failed to update the product ! Please try again later",
-
+        message: "You are not authenticated",
       });
-
     }
-
   } catch (e) {
-
     console.log(error);
-
     return NextResponse.json({
-
       success: false,
-
       message: "Something went wrong ! Please try again later",
-
     });
-
   }
-
 }
