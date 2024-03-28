@@ -1,5 +1,5 @@
 "use client";
-import { addNewProduct, updateProduct } from "@/app/services/product";
+import { addNewProduct, updateProduct } from "@/services/product";
 import InputComponent from "@/components/FormElements/InputComponent";
 import SelectComponent from "@/components/FormElements/SelectComponent";
 import ComponentLevelLoader from "@/components/Loader/ComponentLevelLoader";
