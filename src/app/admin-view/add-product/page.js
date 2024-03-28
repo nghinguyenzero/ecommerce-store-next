@@ -1,5 +1,5 @@
 "use client";
-import { addNewProduct } from "@/app/services/product";
+import { addNewProduct, updateProduct } from "@/app/services/product";
 import InputComponent from "@/components/FormElements/InputComponent";
 import SelectComponent from "@/components/FormElements/SelectComponent";
 import ComponentLevelLoader from "@/components/Loader/ComponentLevelLoader";
@@ -69,41 +69,41 @@ const initFormData = {
 export default function AdminAddNewProduct() {
     const [formData, setFormData] = useState(initFormData);
     const router = useRouter()
-    
 
 
 
-    const { 
+
+    const {
         componentLevelLoader, setComponentLevelLoader,
         currentUpdatedProduct, setCurrentUpdatedProduct
     } = useContext(GlobalContext)
-    console.log({currentUpdatedProduct});
+    console.log({ currentUpdatedProduct });
 
-    useEffect(()=>{
-        if(currentUpdatedProduct !== null) setFormData(currentUpdatedProduct)
+    useEffect(() => {
+        if (currentUpdatedProduct !== null) setFormData(currentUpdatedProduct)
     }, [currentUpdatedProduct])
 
     async function handleImage(event) {
         const extractImageUrl = await helperForUploadingImageToFirebase(
             event.target.files[0]
         )
-        if(extractImageUrl) {
+        if (extractImageUrl) {
             setFormData({
                 ...formData,
                 imageUrl: extractImageUrl
             })
         }
     }
-    console.log({formData});
+    console.log({ formData });
 
     function handleTileClick(getCurrentItem) {
-        console.log({getCurrentItem});
+        console.log({ getCurrentItem });
         let cpySizes = [...formData.sizes]
         const index = cpySizes.findIndex(item => item.id === getCurrentItem.id)
-        if(index===-1) {
+        if (index === -1) {
             cpySizes.push(getCurrentItem)
         } else {
-            cpySizes = cpySizes.filter(item=> item.id !== getCurrentItem.id)
+            cpySizes = cpySizes.filter(item => item.id !== getCurrentItem.id)
         }
         setFormData({
             ...formData,
@@ -111,31 +111,31 @@ export default function AdminAddNewProduct() {
         })
     }
 
-    async function handleAddProduct () {
-        setComponentLevelLoader({loading:true, id:''})
+    async function handleAddProduct() {
+        setComponentLevelLoader({ loading: true, id: '' })
         const res = currentUpdatedProduct !== null
-        ? await updateProduct(formData) 
-        : await addNewProduct(formData)
-        console.log({res});
-        if(res.success) {
-            setComponentLevelLoader({loading:false  , id:''})
+            ? await updateProduct(formData)
+            : await addNewProduct(formData)
+        console.log({ res });
+        if (res.success) {
+            setComponentLevelLoader({ loading: false, id: '' })
             toast.success(res.message, {
                 position: toast.POSITION.TOP_RIGHT
             })
             setFormData(initFormData)
-            setTimeout(()=>{
+            setCurrentUpdatedProduct(null)
+            setTimeout(() => {
                 router.push('/admin-view/all-products')
             }, 1000)
         } else {
             toast.error(res.message, {
                 position: toast.POSITION.TOP_RIGHT
             })
-            setComponentLevelLoader({loading:false, id:''})
+            setComponentLevelLoader({ loading: false, id: '' })
             setFormData(initFormData)
 
         }
-
-    } 
+    }
 
     return (
         <div className="w-full mt-5 mr-0 mb-0 ml-0 relative">
@@ -150,9 +150,9 @@ export default function AdminAddNewProduct() {
 
                     <div className="flex gap-2 flex-col">
                         <label>Available sizes</label>
-                        <TileComponent 
+                        <TileComponent
                             selected={formData.sizes}
-                            data={AvailableSizes} 
+                            data={AvailableSizes}
                             onClick={handleTileClick}
                         />
                     </div>
@@ -163,7 +163,7 @@ export default function AdminAddNewProduct() {
                                 placeholder={controlItem.placeholder}
                                 label={controlItem.label}
                                 value={formData[controlItem.id]}
-                                onChange={(event)=>{
+                                onChange={(event) => {
                                     setFormData({
                                         ...formData,
                                         [controlItem.id]: event.target.value
@@ -174,7 +174,7 @@ export default function AdminAddNewProduct() {
                             <SelectComponent
                                 label={controlItem.label}
                                 options={controlItem.options}
-                                onChange={(event)=>{
+                                onChange={(event) => {
                                     setFormData({
                                         ...formData,
                                         [controlItem.id]: event.target.value
@@ -183,22 +183,22 @@ export default function AdminAddNewProduct() {
                             />
                         ) : null
                     )}
-                    <button 
+                    <button
                         onClick={handleAddProduct}
                         className="inline-flex w-full items-center justify-center bg-black px-6 py-4 text-lg text-white font-medium uppercase tracking-wide"
-                        >
-                    {
-                        componentLevelLoader && componentLevelLoader.loading 
-                        ? <ComponentLevelLoader
-                            text={"Adding product"}
-                            color={"#ffffff"}
-                            loading={componentLevelLoader && componentLevelLoader.loading}
-                        /> : 'Add Product'
-                    }
+                    >
+                        {
+                            componentLevelLoader && componentLevelLoader.loading
+                                ? <ComponentLevelLoader
+                                    text={currentUpdatedProduct !== null ? 'Updating Product' : 'Adding product'}
+                                    color={"#ffffff"}
+                                    loading={componentLevelLoader && componentLevelLoader.loading}
+                                /> : (currentUpdatedProduct !== null ? 'Update Product' : 'Add product')
+                        }
                     </button>
                 </div>
             </div>
-            <Notification/>
+            <Notification />
         </div>
     );
 }

@@ -34,7 +34,7 @@ export const getAllAdminProducts = async () => {
   }
 };
 
-export const updateAProduct = async (formData) => {
+export const updateProduct = async (formData) => {
     try {
       const res = await fetch("/api/admin/update-product", {
         method: "PUT",
@@ -54,7 +54,7 @@ export const updateAProduct = async (formData) => {
     }
   };
   
-  export const deleteAProduct = async (id) => {
+  export const deleteProduct = async (id) => {
     try {
       const res = await fetch(`/api/admin/delete-product?id=${id}`, {
         method: "DELETE",
