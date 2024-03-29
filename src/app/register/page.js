@@ -3,10 +3,11 @@ import InputComponent from "@/components/FormElements/InputComponent";
 import SelectComponent from "@/components/FormElements/SelectComponent";
 import { registrationFormControls } from "@/utils";
 import { useContext, useEffect, useState } from "react";
-import { registerNewUser } from "../services/register";
+// import { registerNewUser } from "../services/register";
 import ComponentLevelLoader from "@/components/Loader/ComponentLevelLoader";
 import { GlobalContext } from "@/context";
 import { toast } from "react-toastify";
+import { registerNewUser } from "@/services/register";
 
 const initialFormData = {
   name: "",

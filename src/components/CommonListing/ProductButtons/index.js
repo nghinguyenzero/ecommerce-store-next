@@ -1,10 +1,8 @@
 "use client";
-
 import ComponentLevelLoader from "@/components/Loader/ComponentLevelLoader";
-// import ComponentLevelLoader from "@/components/Loader/componentlevel";
 import { GlobalContext } from "@/context";
 import { addToCart } from "@/services/cart";
-import { deleteAProduct } from "@/services/product";
+import { deleteProduct } from "@/services/product";
 import { usePathname, useRouter } from "next/navigation";
 import { useContext } from "react";
 import { toast } from "react-toastify";
@@ -25,7 +23,7 @@ export default function ProductButton({ item }) {
   async function handleDeleteProduct(item) {
     setComponentLevelLoader({ loading: true, id: item._id });
 
-    const res = await deleteAProduct(item._id);
+    const res = await deleteProduct(item._id);
 
     if (res.success) {
       setComponentLevelLoader({ loading: false, id: "" });
@@ -59,8 +57,6 @@ export default function ProductButton({ item }) {
       setComponentLevelLoader({ loading: false, id: "" });
       setShowCartModal(true)
     }
-
-    console.log(res);
   }
 
   return isAdminView ? (

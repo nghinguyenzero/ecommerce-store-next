@@ -6,6 +6,7 @@ import { Fragment, useContext, useEffect } from "react"
 import CommonModal from "../CommonModal"
 import Cookies from "js-cookie"
 import { usePathname, useRouter } from "next/navigation"
+import CartModal from "../CartModal"
 
 
 function NavItems({ isModalView  = false , isAdminView, router}) {
@@ -46,7 +47,7 @@ export default function Navbar() {
         showNavModal, setShowNavModal, 
         user, setUser, 
         isAuthUser, setIsAuthUser,
-        currentUpdatedProduct, setCurrentUpdatedProduct
+        currentUpdatedProduct, setCurrentUpdatedProduct, showCartModal
     } = useContext(GlobalContext)
 
     const pathName = usePathname()
@@ -80,7 +81,7 @@ export default function Navbar() {
                 className="flex items-center cursor-pointer"
             >
                 <span className="slef-center text-2xl font-semibold whitespace-nowrap">
-                    Ecommerce Store
+                    Zero Store
                 </span>
             </div>
             <div className="flex md:order-2 gap-2">
@@ -151,6 +152,10 @@ export default function Navbar() {
         show={showNavModal} 
         setShow={setShowNavModal}
         />
+        {
+            showCartModal && <CartModal/>
+        }
     </>
+
 
 }

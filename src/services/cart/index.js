@@ -27,9 +27,7 @@ export const getAllCartItems = async (id) => {
         Authorization: `Bearer ${Cookies.get("token")}`,
       },
     });
-
     const data = await res.json();
-
     return data;
   } catch (e) {
     console.log(e);
