@@ -73,6 +73,8 @@ export default function CartModal() {
       setComponentLevelLoader({ loading: false, id: getCartItemID });
     }
   }
+  console.log({cartItems});
+
 
   return (
     <CommonModal
