@@ -13,6 +13,14 @@ export default function GlobalState({children}) {
     const [currentUpdatedProduct, setCurrentUpdatedProduct] = useState(null)
     const [showCartModal, setShowCartModal] = useState(false)
     const [cartItems, setCartItems] = useState([]);
+    const [addresses, setAddresses]= useState([]);
+    const [addressFormData, setAddressFormData] = useState({
+      fullName : '',
+      city : '',
+      country : '',
+      postalCode : '',
+      address: ''
+    })
 
 
     useEffect(()=>{
@@ -35,7 +43,11 @@ export default function GlobalState({children}) {
             componentLevelLoader, setComponentLevelLoader,
             currentUpdatedProduct, setCurrentUpdatedProduct,
             showCartModal, setShowCartModal,
-            cartItems, setCartItems
+            cartItems, setCartItems,
+            addresses,
+            setAddresses,
+            addressFormData,
+            setAddressFormData
         }}>
         {children}
     </GlobalContext.Provider>
