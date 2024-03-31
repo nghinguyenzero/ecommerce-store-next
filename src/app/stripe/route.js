@@ -1,4 +1,4 @@
-// import { CURRENT_URL } from "@/constant";
+import { CURRENT_URL } from "@/constant";
 import AuthUser from "@/middleware/AuthUser";
 import { NextResponse } from "next/server";
 
@@ -16,8 +16,8 @@ export async function POST(req) {
         payment_method_types: ["card"],
         line_items: res,
         mode: "payment",
-        success_url: `${process.env.API_URL}/checkout` + "?status=success",
-        cancel_url:  `${process.env.API_URL}/checkout` + "?status=cancel",
+        success_url: `${CURRENT_URL}/checkout` + "?status=success",
+        cancel_url:  `${CURRENT_URL}/checkout` + "?status=cancel",
       });
 
       return NextResponse.json({
