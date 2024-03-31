@@ -28,11 +28,8 @@ export default function Checkout() {
   const router = useRouter();
   const params = useSearchParams();
 
-  const publishableKey =
-    "pk_test_51Ozz0i2MuXnLtMQGEjVoP996tuD9wUyBPNCshjEAx63GyuMYq1oPbAJCqpAdrVIb5BEpjJxN4jQBZDHh3EdqQstk00ldlbX911";
+  const publishableKey = process.env.STRIPE_PUBLISHABLE_KEY
   const stripePromise = loadStripe(publishableKey);
-
-  console.log(cartItems);
 
   async function getAllAddresses() {
     const res = await fetchAllAddresses(user?._id);
@@ -138,8 +135,12 @@ export default function Checkout() {
       },
       quantity: 1,
     }));
-
+    
     const res = await callStripeSession(createLineItems);
+    console.log('callStripeSession');
+    console.log(res);
+
+
     setIsOrderProcessing(true);
     localStorage.setItem("stripe", true);
     localStorage.setItem("checkoutFormData", JSON.stringify(checkoutFormData));

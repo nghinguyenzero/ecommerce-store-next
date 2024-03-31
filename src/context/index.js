@@ -37,7 +37,7 @@ export default function GlobalState({children}) {
 
 
     useEffect(()=>{
-        console.log(Cookies.get('token'));
+        // console.log(Cookies.get('token'));
         if(Cookies.get('token') !== undefined) {
             setIsAuthUser(true)
             const userData = JSON.parse(localStorage.getItem('user')) || {}
@@ -47,7 +47,7 @@ export default function GlobalState({children}) {
         } else {
             setIsAuthUser(false)
         }
-    }, Cookies)
+    }, [Cookies])
 
 
     return <GlobalContext.Provider value={{

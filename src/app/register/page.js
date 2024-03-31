@@ -79,7 +79,7 @@ export default function Register(props) {
                   {registrationFormControls.map((controlItem) =>
                     controlItem.componentType === "input" ? (
                       <InputComponent
-                        // key={controlItem.id}
+                        key={controlItem.id}
                         type={controlItem.type}
                         placeholder={controlItem.placeholder}
                         label={controlItem.label}
@@ -93,7 +93,7 @@ export default function Register(props) {
                       />
                     ) : controlItem.componentType === "select" ? (
                       <SelectComponent
-                        // key={controlItem.id}
+                        key={controlItem.id}
                         label={controlItem.label}
                         options={controlItem.options}
                         onChange={(event) => {

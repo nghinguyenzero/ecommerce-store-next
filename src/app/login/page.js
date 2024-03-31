@@ -17,6 +17,10 @@ const initFormData = {
 
 export default function Login() {
   const [formData, setFormData] = useState(initFormData);
+  console.log('HOST_URL');
+  console.log(process.env.API_KEY);
+
+
 
   const {
     isAuthUser, setIsAuthUser,
@@ -77,6 +81,7 @@ export default function Login() {
                 {loginFormControls.map((controlItem) =>
                   controlItem.componentType === "input" ? (
                     <InputComponent
+                      key={controlItem.id}
                       type={controlItem.type}
                       placeholder={controlItem.placeholder}
                       label={controlItem.label}

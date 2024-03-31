@@ -24,7 +24,7 @@ export default function CommonCart({
                     {cartItems.map((cartItem) => (
                       <li
                         className="flex-col flex space-y-3 py-6 text-left sm:flex-row sm:space-x-5 sm:space-y-0"
-                        key={cartItem.id}
+                        key={cartItem._id}
                       >
                         <div className="shrink-0">
                           <img
