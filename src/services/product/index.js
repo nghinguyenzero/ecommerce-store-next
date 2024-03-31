@@ -15,7 +15,7 @@ export const addNewProduct = async (formData) => {
 
     return data;
   } catch (error) {
-    console.log(error);
+    // console.log(error);
   }
 };
 
