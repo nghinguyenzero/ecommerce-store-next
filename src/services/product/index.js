@@ -1,4 +1,4 @@
-import { CURRENT_URL } from "@/constant";
+// import { CURRENT_URL } from "@/constant";
 import Cookies from "js-cookie";
 
 export const addNewProduct = async (formData) => {
@@ -23,8 +23,12 @@ export const addNewProduct = async (formData) => {
 export const getAllAdminProducts = async () => {
   try {
     console.log("process.env.API_URL");
+    console.log('CURRENT_URL');
+    // console.log(CURRENT_URL);
+
     console.log(process.env.API_URL);
-    const res = await fetch(`${CURRENT_URL}/api/admin/all-products`, {
+
+    const res = await fetch(`${process.env.API_URL}/api/admin/all-products`, {
       method: "GET",
       cache : 'no-store'
     });
@@ -77,7 +81,7 @@ export const updateProduct = async (formData) => {
   export const productByCategory = async (id) => {
     try {
       const res = await fetch(
-        `${CURRENT_URL}/api/admin/product-by-category?id=${id}`,
+        `${process.env.API_URL}/api/admin/product-by-category?id=${id}`,
         {
           method: "GET",
           cache: "no-store",
@@ -95,7 +99,7 @@ export const updateProduct = async (formData) => {
   export const productById = async (id) => {
     try {
       const res = await fetch(
-        `${CURRENT_URL}/api/admin/product-by-id?id=${id}`,
+        `${process.env.API_URL}/api/admin/product-by-id?id=${id}`,
         {
           method: "GET",
           cache: "no-store",
