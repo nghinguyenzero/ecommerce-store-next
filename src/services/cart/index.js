@@ -1,7 +1,5 @@
+import { CURRENT_URL } from "@/constant";
 import Cookies from "js-cookie";
-// const CURRENT_URL = "http://localhost:3000" 
-const CURRENT_URL = "https://zero-store-next.vercel.app"
-
 
 export const addToCart = async (formData) => {
   try {

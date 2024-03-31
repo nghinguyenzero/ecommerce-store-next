@@ -1,13 +1,10 @@
+import { CURRENT_URL } from "@/constant";
 import AuthUser from "@/middleware/AuthUser";
 import { NextResponse } from "next/server";
 
 const stripe = require("stripe")( process.env.STRIPE_SECRET_KEY);
 
 export const dynamic = "force-dynamic";
-
-// const CURRENT_URL = "http://localhost:3000" 
-const CURRENT_URL = "https://zero-store-next.vercel.app"
-
 
 export async function POST(req) {
   try {

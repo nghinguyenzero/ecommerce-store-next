@@ -1,7 +1,5 @@
+import { CURRENT_URL } from "@/constant";
 import Cookies from "js-cookie";
-
-// const CURRENT_URL = "http://localhost:3000" 
-const CURRENT_URL = "https://zero-store-next.vercel.app"
 
 export const addNewProduct = async (formData) => {
   try {
@@ -26,7 +24,7 @@ export const getAllAdminProducts = async () => {
   try {
     console.log("process.env.API_URL");
     console.log(process.env.API_URL);
-    const res = await fetch(`https://zero-store-next.vercel.app/api/admin/all-products`, {
+    const res = await fetch(`${CURRENT_URL}/api/admin/all-products`, {
       method: "GET",
       cache : 'no-store'
     });
