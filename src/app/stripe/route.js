@@ -5,6 +5,10 @@ const stripe = require("stripe")( process.env.STRIPE_SECRET_KEY);
 
 export const dynamic = "force-dynamic";
 
+// const CURRENT_URL = "http://localhost:3000" 
+const CURRENT_URL = "https://zero-store-next.vercel.app"
+
+
 export async function POST(req) {
   try {
     const isAuthUser = await AuthUser(req);
@@ -15,8 +19,8 @@ export async function POST(req) {
         payment_method_types: ["card"],
         line_items: res,
         mode: "payment",
-        success_url: `http://localhost:3000/checkout` + "?status=success",
-        cancel_url:  `http://localhost:3000/checkout` + "?status=cancel",
+        success_url: `${CURRENT_URL}/checkout` + "?status=success",
+        cancel_url:  `${CURRENT_URL}/checkout` + "?status=cancel",
       });
 
       return NextResponse.json({

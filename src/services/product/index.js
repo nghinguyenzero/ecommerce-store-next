@@ -1,5 +1,8 @@
 import Cookies from "js-cookie";
 
+// const CURRENT_URL = "http://localhost:3000" 
+const CURRENT_URL = "https://zero-store-next.vercel.app"
+
 export const addNewProduct = async (formData) => {
   try {
     const response = await fetch("/api/admin/add-product", {
@@ -76,7 +79,7 @@ export const updateProduct = async (formData) => {
   export const productByCategory = async (id) => {
     try {
       const res = await fetch(
-        `http://localhost:3000/api/admin/product-by-category?id=${id}`,
+        `${CURRENT_URL}/api/admin/product-by-category?id=${id}`,
         {
           method: "GET",
           cache: "no-store",
@@ -94,7 +97,7 @@ export const updateProduct = async (formData) => {
   export const productById = async (id) => {
     try {
       const res = await fetch(
-        `http://localhost:3000/api/admin/product-by-id?id=${id}`,
+        `${CURRENT_URL}/api/admin/product-by-id?id=${id}`,
         {
           method: "GET",
           cache: "no-store",

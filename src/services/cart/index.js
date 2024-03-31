@@ -1,4 +1,7 @@
 import Cookies from "js-cookie";
+// const CURRENT_URL = "http://localhost:3000" 
+const CURRENT_URL = "https://zero-store-next.vercel.app"
+
 
 export const addToCart = async (formData) => {
   try {
@@ -21,7 +24,7 @@ export const addToCart = async (formData) => {
 
 export const getAllCartItems = async (id) => {
   try {
-    const res = await fetch(`http://localhost:3000/api/cart/all-cart-items?id=${id}`, {
+    const res = await fetch(`${CURRENT_URL}/api/cart/all-cart-items?id=${id}`, {
       method: "GET",
       headers: {
         Authorization: `Bearer ${Cookies.get("token")}`,
