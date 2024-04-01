@@ -1,5 +1,5 @@
-//  export const CURRENT_URL = "https://zero-store-next.vercel.app"
- export const CURRENT_URL = "http://localhost:3000" 
+ export const CURRENT_URL = "https://zero-store-next.vercel.app"
+//  export const CURRENT_URL = "http://localhost:3000" 
 //  export const STRIPE_PUBLISHABLE_KEY= "pk_test_51Ozz0i2MuXnLtMQGEjVoP996tuD9wUyBPNCshjEAx63GyuMYq1oPbAJCqpAdrVIb5BEpjJxN4jQBZDHh3EdqQstk00ldlbX911"
 //  export const STRIPE_SECRET_KEY= "sk_test_51Ozz0i2MuXnLtMQGLxZ2j0SaJoS6Y8wZca4wewV4m0hfALUxn4hyxrm14GwPLMzdUyyH8lEfqNTrih1KGPYE4ONP00lxx7gQvS"
  
