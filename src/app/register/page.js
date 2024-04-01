@@ -8,6 +8,7 @@ import ComponentLevelLoader from "@/components/Loader/ComponentLevelLoader";
 import { GlobalContext } from "@/context";
 import { toast } from "react-toastify";
 import { registerNewUser } from "@/services/register";
+import { useRouter } from "next/navigation";
 
 const initialFormData = {
   name: "",
@@ -16,6 +17,7 @@ const initialFormData = {
   role: "customer",
 };
 export default function Register(props) {
+  const router = useRouter()
   const [formData, setFormData] = useState(initialFormData);
   console.log({formData});
   const [isRegistered, setIsRegistered] = useState(false);
@@ -68,6 +70,7 @@ export default function Register(props) {
               </p>
               {isRegistered ? (
                 <button
+                  onClick={()=> router.push('/login')}
                   className="inline-flex w-full items-center justify-center bg-black px-6 py-4 text-lg
                                     text-white transition-all duration-200 ease-in-out focus:shadow font-medium uppercase tracking-wide
                                 "
