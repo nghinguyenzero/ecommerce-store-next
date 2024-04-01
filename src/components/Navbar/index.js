@@ -81,7 +81,7 @@ export default function Navbar() {
                 onClick={()=> router.push('/')} 
                 className="flex items-center cursor-pointer"
             >
-                <span className="slef-center text-2xl font-semibold whitespace-nowrap">
+                <span className="slef-center text-2xl font-semibold whitespace-nowrap rounded-md">
                     Zero Store
                 </span>
             </div>
@@ -90,35 +90,35 @@ export default function Navbar() {
                 <Fragment>
                     <button
                         onClick={()=>router.push('/account')}
-                        className="mt-1.5 inline-block bg-black px-5 py-3 text-xs font-medium upprcase tracking-wide text-white"
+                        className="rounded-md mt-1.5 inline-block bg-black px-5 py-3 text-xs font-medium upprcase tracking-wide text-white"
                     >Account
                     </button>
-                    <button onClick={()=> setShowCartModal(true)} className="mt-1.5 inline-block bg-black px-5 py-3 text-xs font-medium upprcase tracking-wide text-white">
+                    <button onClick={()=> setShowCartModal(true)} className="rounded-md mt-1.5 inline-block bg-black px-5 py-3 text-xs font-medium upprcase tracking-wide text-white">
                         Cart</button>
                 </Fragment>
                 ): null}
                 {
                     user?.role === 'admin' 
                     ? isAdminView ? <button 
-                        onClick={()=> router.push('/client-view')} 
-                        className="mt-1.5 inline-block bg-black px-5 py-3 text-xs font-medium upprcase tracking-wide text-white"
+                        onClick={()=> router.push('/product/listing/all-products')} 
+                        className="rounded-md mt-1.5 inline-block bg-black px-5 py-3 text-xs font-medium upprcase tracking-wide text-white"
                         >Client view</button> 
                     : <button 
-                        onClick={()=> router.push('/admin-view')} 
-                        className="mt-1.5 inline-block bg-black px-5 py-3 text-xs font-medium upprcase tracking-wide text-white"
+                        onClick={()=> router.push('/admin-view/all-products')} 
+                        className="rounded-md mt-1.5 inline-block bg-black px-5 py-3 text-xs font-medium upprcase tracking-wide text-white"
                     
                     >Admin view</button>
                     : null
                 } 
                 {  isAuthUser? <button 
                     onClick={handleLogout}
-                    className="mt-1.5 inline-block bg-black px-5 py-3 text-xs font-medium upprcase tracking-wide text-white"
+                    className="rounded-md mt-1.5 inline-block bg-black px-5 py-3 text-xs font-medium upprcase tracking-wide text-white"
                 
                 >
                     Logout
                     </button> : <button
                     onClick={()=> router.push('/login')}
-                    className="mt-1.5 inline-block bg-black px-5 py-3 text-xs font-medium upprcase tracking-wide text-white">Login</button> }
+                    className="rounded-md mt-1.5 inline-block bg-black px-5 py-3 text-xs font-medium upprcase tracking-wide text-white">Login</button> }
 
 
               <button
