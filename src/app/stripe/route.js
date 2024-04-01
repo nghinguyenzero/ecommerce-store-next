@@ -1,8 +1,8 @@
-import { CURRENT_URL } from "@/constant";
+import { CURRENT_URL, STRIPE_SECRET_KEY } from "@/constant";
 import AuthUser from "@/middleware/AuthUser";
 import { NextResponse } from "next/server";
 
-const stripe = require("stripe")( process.env.STRIPE_SECRET_KEY);
+const stripe = require("stripe")( STRIPE_SECRET_KEY);
 
 export const dynamic = "force-dynamic";
 

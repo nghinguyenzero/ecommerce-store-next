@@ -1,6 +1,6 @@
 "use client";
-
 import Notification from "@/components/Notification";
+import { STRIPE_PUBLISHABLE_KEY } from "@/constant";
 import { GlobalContext } from "@/context";
 import { fetchAllAddresses } from "@/services/address";
 import { createNewOrder } from "@/services/order";
@@ -28,7 +28,7 @@ export default function Checkout() {
   const router = useRouter();
   const params = useSearchParams();
 
-  const publishableKey = process.env.STRIPE_PUBLISHABLE_KEY
+  const publishableKey = STRIPE_PUBLISHABLE_KEY
   const stripePromise = loadStripe(publishableKey);
 
   async function getAllAddresses() {
@@ -46,7 +46,6 @@ export default function Checkout() {
   useEffect(() => {
     async function createFinalOrder() {
       const isStripe = JSON.parse(localStorage.getItem("stripe"));
-
       if (
         isStripe &&
         params.get("status") === "success" &&
@@ -92,7 +91,6 @@ export default function Checkout() {
         }
       }
     }
-
     createFinalOrder();
   }, [params.get("status"), cartItems]);
 
@@ -103,7 +101,6 @@ export default function Checkout() {
         ...checkoutFormData,
         shippingAddress: {},
       });
-
       return;
     }
 
@@ -123,7 +120,6 @@ export default function Checkout() {
 
   async function handleCheckout() {
     const stripe = await stripePromise;
-
     const createLineItems = cartItems.map((item) => ({
       price_data: {
         currency: "usd",
@@ -139,8 +135,6 @@ export default function Checkout() {
     const res = await callStripeSession(createLineItems);
     console.log('callStripeSession');
     console.log(res);
-
-
     setIsOrderProcessing(true);
     localStorage.setItem("stripe", true);
     localStorage.setItem("checkoutFormData", JSON.stringify(checkoutFormData));
@@ -153,6 +147,14 @@ export default function Checkout() {
   }
 
   console.log(checkoutFormData);
+  useEffect(() => {
+    if (orderSuccess) {
+      setTimeout(() => {
+        // setOrderSuccess(false);
+        router.push("/orders");
+      }, [2000]);
+    }
+  }, [orderSuccess]);
 
   if (orderSuccess) {
     return (
@@ -162,11 +164,12 @@ export default function Checkout() {
             <div className="bg-white shadow">
               <div className="px-4 py-6 sm:px-8 sm:py-10 flex flex-col gap-5">
                 <h1 className="font-bold text-lg">
-                  Your payment is successfull
+                Your payment is successfull and you will be redirected to
+                  orders page in 2 seconds !
                 </h1>
-                <button className="mt-5 mr-5 w-full  inline-block bg-black text-white px-5 py-3 text-xs font-medium uppercase tracking-wide">
+                {/* <button className="mt-5 mr-5 w-full  inline-block bg-black text-white px-5 py-3 text-xs font-medium uppercase tracking-wide">
                   View your orders
-                </button>
+                </button> */}
               </div>
             </div>
           </div>
