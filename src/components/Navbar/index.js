@@ -104,7 +104,7 @@ export default function Navbar() {
                         className="rounded-md mt-1.5 inline-block bg-black px-5 py-3 text-xs font-medium upprcase tracking-wide text-white"
                         >Client view</button> 
                     : <button 
-                        onClick={()=> router.push('/admin-view/all-products')} 
+                        onClick={()=> router.push('/admin-view')} 
                         className="rounded-md mt-1.5 inline-block bg-black px-5 py-3 text-xs font-medium upprcase tracking-wide text-white"
                     
                     >Admin view</button>

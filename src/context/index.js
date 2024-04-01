@@ -14,15 +14,7 @@ export const initialCheckoutFormData = {
     isProcessing: true,
   };
 
-const protectedRoutes = [
-  "/cart",
-  "/checkout",
-  "/account",
-  "/orders",
-  "/admin-view",
-  "/admin-view/add-product",
-  "/admin-view/all-products",
-];
+  const protectedRoutes = ["cart", "checkout", "account", "orders", "admin-view"];
 
 const protectedAdminRoutes = [
   "/admin-view",
@@ -40,6 +32,8 @@ export default function GlobalState({children}) {
     const [showCartModal, setShowCartModal] = useState(false)
     const [cartItems, setCartItems] = useState([]);
     const [addresses, setAddresses]= useState([]);
+    const [allOrdersForAllUsers, setAllOrdersForAllUsers] = useState([]);
+
     const [addressFormData, setAddressFormData] = useState({
         fullName: "",
         city: "",
@@ -56,6 +50,7 @@ export default function GlobalState({children}) {
 
     const router = useRouter();
     const pathName = usePathname();
+
     useEffect(()=>{
         // console.log(Cookies.get('token'));
         if(Cookies.get('token') !== undefined) {
@@ -72,9 +67,11 @@ export default function GlobalState({children}) {
 
     useEffect(() => {
       if (
+        pathName !== "/register" &&
+        pathName !== "/" &&
         user &&
         Object.keys(user).length === 0 &&
-        protectedRoutes.indexOf(pathName) > -1
+        protectedRoutes.includes(pathName) > -1
       )
         router.push("/login");
     }, [user, pathName]);
@@ -110,6 +107,8 @@ export default function GlobalState({children}) {
             setAllOrdersForUser,
             orderDetails,
             setOrderDetails,
+            allOrdersForAllUsers,
+            setAllOrdersForAllUsers,
         }}>
         {children}
     </GlobalContext.Provider>

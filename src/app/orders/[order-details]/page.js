@@ -118,7 +118,7 @@ export default function OrderDetails() {
 
         <h1 className="text-3xl lg:text-4xl font-bold leading-7 lg:leading-9 text-gray-900">
 
-          Order #{orderDetails._id}
+        Order #{orderDetails && orderDetails._id}
 
         </h1>
 
