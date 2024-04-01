@@ -13,8 +13,9 @@ export default function Home() {
 
   async function getListOfProducts() {
     const res = await getAllAdminProducts();
+    console.log('object', res);
 
-    if (res.success) {
+    if (res && res?.success) {
       setProducts(res.data);
     }
   }
@@ -26,16 +27,15 @@ export default function Home() {
   console.log(products);
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
+    <main className="flex min-h-screen flex-col items-center justify-between px-24 py-10">
       <section className="">
-        <div className="grid max-w-screen-xl px-4 py-8 mx-suto  lg:gap-8 xl:gap-0 lg:py-16 lg:grid-cols-12">
+        <div className="grid max-w-screen-xl px-4 py-4 mx-suto  lg:gap-8 xl:gap-0 lg:py-8 lg:grid-cols-12">
           <div className="mr-auto place-self-center lg:col-span-7">
             <h1 className="max-w-2xl mb-4 text-4xl font-extrabold tracking-tight leading-none md:text-5xl xl:text-6xl">
               Best Fashion Collection
             </h1>
             <p className="max-w-2xl mb-6 font-light text-gray-500 lg:mb-8 md:text-lg lg:text-xl">
-              Quisquemos sodales suscipit tortor ditaemcos condimentum de cosmo
-              lacus meleifend menean diverra loremous.
+            Welcome to our trendy clothing store! Discover the latest fashion trends and find your perfect style. From casual to formal wear, we have everything you need to elevate your wardrobe. Shop now for quality and style!.
             </p>
 
             <button
@@ -53,13 +53,13 @@ export default function Home() {
             />
           </div>
         </div>
-        <div className="max-w-screen-xl px-4 py-8 mx-auto sm:py-12 sm:px-6 lg:px-8">
+        <div className="max-w-screen-xl px-4 py-4 mx-auto sm:py-6 sm:px-6 lg:px-4">
           <div className="grid grid-cols-1 gap-4 lg:grid-cols-3 lg:items-stretch">
             <div className="grid p-6 bg-gray-100 rounded place-content-center sm:p-8">
               <div className="max-w-md mx-auto text-center lg:text-left">
                 <div>
                   <h2 className="text-xl font-bold text-gray-900 sm:text-3xl">
-                    Summer Sale Collection
+                    Sale Collection
                   </h2>
                 </div>
                 <button
