@@ -11,14 +11,10 @@ export const addNewProduct = async (formData) => {
       },
       body: JSON.stringify(formData),
     });
-
     const data = await response.json();
-
     return data;
-  } catch (error) {
-    // console.log(error);
-  }
-};
+  } catch (error) { console.log(error) }
+}
 
 export const getAllAdminProducts = async () => {
   console.log({CURRENT_URL});
@@ -27,13 +23,10 @@ export const getAllAdminProducts = async () => {
       method: "GET",
       cache : 'no-store'
     });
-
     const data = await res.json();
     return data;
-  } catch (error) {
-    console.log(error);
-  }
-};
+  } catch (error) { console.log(error)}
+}
 
 export const updateProduct = async (formData) => {
     try {
@@ -46,14 +39,10 @@ export const updateProduct = async (formData) => {
         cache: "no-store",
         body: JSON.stringify(formData),
       });
-  
       const data = await res.json();
-  
       return data;
-    } catch (e) {
-      console.log(e);
-    }
-  };
+    } catch (e) { console.log(e)}
+  }
   
   export const deleteProduct = async (id) => {
     try {
@@ -63,15 +52,10 @@ export const updateProduct = async (formData) => {
           Authorization: `Bearer ${Cookies.get("token")}`,
         },
       });
-  
       const data = await res.json();
-  
       return data;
-    } catch (e) {
-      console.log(e);
-    }
-  };
-
+    } catch (e) { console.log(e)}
+  }
 
   export const productByCategory = async (id) => {
     try {
@@ -82,14 +66,10 @@ export const updateProduct = async (formData) => {
           cache: "no-store",
         }
       );
-  
       const data = await res.json();
-  
       return data;
-    } catch (e) {
-      console.log(e);
-    }
-  };
+    } catch (e) { console.log(e)}
+  }
   
   export const productById = async (id) => {
     try {
@@ -100,11 +80,8 @@ export const updateProduct = async (formData) => {
           cache: "no-store",
         }
       );
-  
       const data = await res.json();
   
       return data;
-    } catch (e) {
-      console.log(e);
-    }
-  };
+    } catch (e) { console.log(e)}
+  }

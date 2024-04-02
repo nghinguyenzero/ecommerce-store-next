@@ -52,7 +52,6 @@ export default function GlobalState({children}) {
     const pathName = usePathname();
 
     useEffect(()=>{
-        // console.log(Cookies.get('token'));
         if(Cookies.get('token') !== undefined) {
             setIsAuthUser(true)
             const userData = JSON.parse(localStorage.getItem('user')) || {}
@@ -88,7 +87,6 @@ export default function GlobalState({children}) {
         router.push("/unauthorized-page");
     }, [user, pathName]);
 
-
     return <GlobalContext.Provider value={{
             showNavModal, setShowNavModal,
             pageLevelLoader, setPageLevelLoader,
@@ -98,18 +96,12 @@ export default function GlobalState({children}) {
             currentUpdatedProduct, setCurrentUpdatedProduct,
             showCartModal, setShowCartModal,
             cartItems, setCartItems,
-            addresses,
-            setAddresses,
-            addressFormData,
-            setAddressFormData,
-            checkoutFormData,
-            setCheckoutFormData,
-            allOrdersForUser,
-            setAllOrdersForUser,
-            orderDetails,
-            setOrderDetails,
-            allOrdersForAllUsers,
-            setAllOrdersForAllUsers,
+            addresses, setAddresses,
+            addressFormData, setAddressFormData,
+            checkoutFormData, setCheckoutFormData,
+            allOrdersForUser, setAllOrdersForUser,
+            orderDetails, setOrderDetails,
+            allOrdersForAllUsers, setAllOrdersForAllUsers,
         }}>
         {children}
     </GlobalContext.Provider>

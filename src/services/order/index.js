@@ -10,13 +10,9 @@ export const createNewOrder = async (formData) => {
       },
       body: JSON.stringify(formData),
     });
-
     const data = await res.json();
-
     return data;
-  } catch (e) {
-    console.log(e);
-  }
+  } catch (e) { console.log(e) }
 };
 
 export const getAllOrdersForUser = async (id) => {
@@ -27,13 +23,9 @@ export const getAllOrdersForUser = async (id) => {
         Authorization: `Bearer ${Cookies.get("token")}`,
       },
     });
-
     const data = await res.json();
-
     return data;
-  } catch (e) {
-    console.log(e);
-  }
+  } catch (e) { console.log(e) }
 };
 
 export const getOrderDetails = async (id) => {
@@ -44,13 +36,9 @@ export const getOrderDetails = async (id) => {
         Authorization: `Bearer ${Cookies.get("token")}`,
       },
     });
-
     const data = await res.json();
-
     return data;
-  } catch (e) {
-    console.log(e);
-  }
+  } catch (e) { console.log(e)}
 };
 
 
@@ -62,13 +50,9 @@ export const getAllOrdersForAllUsers = async () => {
         Authorization: `Bearer ${Cookies.get("token")}`,
       },
     });
-
     const data = await res.json();
-
     return data;
-  } catch (e) {
-    console.log(e);
-  }
+  } catch (e) { console.log(e)}
 };
 
 export const updateStatusOfOrder = async (formData) => {
@@ -81,11 +65,7 @@ export const updateStatusOfOrder = async (formData) => {
       },
       body: JSON.stringify(formData),
     });
-
     const data = await res.json();
-
     return data;
-  } catch (e) {
-    console.log(e);
-  }
+  } catch (e) { console.log(e)}
 };

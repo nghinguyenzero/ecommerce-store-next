@@ -11,13 +11,9 @@ export const addToCart = async (formData) => {
       },
       body: JSON.stringify(formData),
     });
-
     const data = await res.json();
-
     return data;
-  } catch (e) {
-    console.log(e);
-  }
+  } catch (e) {console.log(e)}
 };
 
 export const getAllCartItems = async (id) => {
@@ -30,9 +26,7 @@ export const getAllCartItems = async (id) => {
     });
     const data = await res.json();
     return data;
-  } catch (e) {
-    console.log(e);
-  }
+  } catch (e) { console.log(e) }
 };
 
 export const deleteFromCart = async (id) => {
@@ -43,11 +37,7 @@ export const deleteFromCart = async (id) => {
         Authorization: `Bearer ${Cookies.get("token")}`,
       },
     });
-
     const data = await res.json();
-
     return data;
-  } catch (e) {
-    console.log(e);
-  }
+  } catch (e) { console.log(e) }
 };

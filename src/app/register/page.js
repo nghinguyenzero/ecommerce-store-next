@@ -3,7 +3,6 @@ import InputComponent from "@/components/FormElements/InputComponent";
 import SelectComponent from "@/components/FormElements/SelectComponent";
 import { registrationFormControls } from "@/utils";
 import { useContext, useEffect, useState } from "react";
-// import { registerNewUser } from "../services/register";
 import ComponentLevelLoader from "@/components/Loader/ComponentLevelLoader";
 import { GlobalContext } from "@/context";
 import { toast } from "react-toastify";
@@ -16,21 +15,31 @@ const initialFormData = {
   password: "",
   role: "customer",
 };
+
 export default function Register(props) {
-  const router = useRouter()
+  const router = useRouter();
   const [formData, setFormData] = useState(initialFormData);
-  console.log({formData});
   const [isRegistered, setIsRegistered] = useState(false);
-  const { pageLevelLoader, setPageLevelLoader , isAuthUser } = useContext(GlobalContext);
+  const { 
+    pageLevelLoader, setPageLevelLoader, isAuthUser 
+  } = useContext(GlobalContext);
+
+  console.log({ formData });
 
   function isFormValid() {
-    return formData && formData.name &&formData.name.trim() !== ''
-    && formData.email && formData.email.trim() !== ''
-    && formData.password && formData.password.trim() !== '' ? true : false
+    return formData &&
+      formData.name &&
+      formData.name.trim() !== "" &&
+      formData.email &&
+      formData.email.trim() !== "" &&
+      formData.password &&
+      formData.password.trim() !== ""
+      ? true
+      : false;
   }
-  console.log({isFormValid: isFormValid() });
+  console.log({ isFormValid: isFormValid() });
 
-  async function handleRegisterOnSubmit () {
+  async function handleRegisterOnSubmit() {
     setPageLevelLoader(true);
     const data = await registerNewUser(formData);
 
@@ -48,15 +57,13 @@ export default function Register(props) {
       setPageLevelLoader(false);
       setFormData(initialFormData);
     }
-
     console.log(data);
-
   }
 
-  useEffect(() =>{
-    if(isAuthUser)router.push('/')
-   }, [isAuthUser])
-  
+  useEffect(() => {
+    if (isAuthUser) router.push("/");
+  }, [isAuthUser]);
+
   return (
     <div className="bg-white relative">
       <div className="flex flex-col items-center justify-between pt-0 pr-10 pb-0 pl-10 mt-8 mr-auto xl:px-5 lg:flex-row">
@@ -70,10 +77,9 @@ export default function Register(props) {
               </p>
               {isRegistered ? (
                 <button
-                  onClick={()=> router.push('/login')}
+                  onClick={() => router.push("/login")}
                   className="inline-flex w-full items-center justify-center bg-black px-6 py-4 text-lg
-                                    text-white transition-all duration-200 ease-in-out focus:shadow font-medium uppercase tracking-wide
-                                "
+                 text-white transition-all duration-200 ease-in-out focus:shadow font-medium uppercase tracking-wide"
                 >
                   Login
                 </button>
@@ -115,18 +121,16 @@ export default function Register(props) {
                                 text-white transition-all duration-200 ease-in-out focus:shadow font-medium
                                 uppercase tracking-wide
                                 "
-                                disabled={!isFormValid()}
-                                onClick={handleRegisterOnSubmit}
+                    disabled={!isFormValid()}
+                    onClick={handleRegisterOnSubmit}
                   >
-                      {pageLevelLoader ? (
+                    {pageLevelLoader ? (
                       <ComponentLevelLoader
                         text={"Registering"}
                         color={"#ffffff"}
                         loading={pageLevelLoader}
                       />
-                    ) : (
-                      "Register"
-                    )}
+                    ) : "Register"}
                   </button>
                 </div>
               )}

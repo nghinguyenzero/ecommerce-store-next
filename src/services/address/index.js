@@ -10,13 +10,9 @@ export const addNewAddress = async (formData) => {
       },
       body: JSON.stringify(formData),
     });
-
     const data = await res.json();
-
     return data;
-  } catch (e) {
-    console.log(e);
-  }
+  } catch (e) { console.log(e) }
 };
 
 export const fetchAllAddresses = async (id) => {
@@ -27,13 +23,9 @@ export const fetchAllAddresses = async (id) => {
         Authorization: `Bearer ${Cookies.get("token")}`,
       },
     });
-
     const data = await res.json();
-
     return data;
-  } catch (e) {
-    console.log(e);
-  }
+  } catch (e) { console.log(e)}
 };
 
 export const updateAddress = async (formData) => {
@@ -45,14 +37,10 @@ export const updateAddress = async (formData) => {
         Authorization: `Bearer ${Cookies.get("token")}`,
       },
       body: JSON.stringify(formData),
-    });
-
+    })
     const data = await res.json();
-
     return data;
-  } catch (e) {
-    console.log(e);
-  }
+  } catch (e) { console.log(e)}
 };
 
 export const deleteAddress = async (id) => {
@@ -63,11 +51,7 @@ export const deleteAddress = async (id) => {
         Authorization: `Bearer ${Cookies.get("token")}`,
       },
     });
-
     const data = await res.json();
-
     return data;
-  } catch (e) {
-    console.log(e);
-  }
+  } catch (e) {console.log(e) }
 };

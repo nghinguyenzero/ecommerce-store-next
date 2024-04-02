@@ -1,16 +1,13 @@
-export const  registerNewUser = async (formData) =>{
+export const registerNewUser = async (formData) => {
     try {
         const response = await fetch('/api/register', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
             },
-            body : JSON.stringify(formData)
+            body: JSON.stringify(formData)
         })
         const finalData = await response.json()
         return finalData
-    } catch (error) {
-        console.log('error', error);
-        
-    }
+    } catch (error) { console.log('registerNewUser error', error)}
 }
