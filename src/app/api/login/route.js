@@ -49,7 +49,7 @@ export async function POST(req) {
         email: checkUser?.email,
         role: checkUser?.role,
       },
-      "default_secret_key",
+      process.env.JWT_SECRET,
       { expiresIn: "1d" }
     );
 

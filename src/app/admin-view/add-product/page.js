@@ -9,49 +9,28 @@ import { GlobalContext } from "@/context";
 import {
     AvailableSizes,
     adminAddProductformControls,
-    firebaseConfig,
-    firebaseStorageURL,
 } from "@/utils";
-import { initializeApp } from "firebase/app";
-import {
-    getDownloadURL,
-    getStorage,
-    ref,
-    uploadBytesResumable,
-} from "firebase/storage";
 import { useContext, useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
+import Cookies from "js-cookie";
 
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const storage = getStorage(app, firebaseStorageURL);
+async function uploadImageToCloudinary(file) {
+    const formData = new FormData();
+    formData.append("file", file);
 
-const createUniqueFileName = (getFile) => {
-    const timestamp = Date.now();
-    const randomStringValue = Math.random().toString(36).substring(2, 12);
-    return `${getFile.name} -${timestamp}-${randomStringValue}`;
-};
-
-async function helperForUploadingImageToFirebase(file) {
-    const getFileName = createUniqueFileName(file);
-    const storageReference = ref(storage, `ecommerce/${getFileName}`);
-    const uploadImage = uploadBytesResumable(storageReference, file);
-    return new Promise((resolve, reject) => {
-        uploadImage.on(
-            "state_changed",
-            (snapshot) => { },
-            (error) => {
-                console.log(error);
-                reject(error);
-            },
-            () => {
-                getDownloadURL(uploadImage.snapshot.ref)
-                    .then((dowloadUrl) => resolve(dowloadUrl))
-                    .catch((error) => reject(error));
-            }
-        );
+    const res = await fetch("/api/upload", {
+        method: "POST",
+        headers: {
+            Authorization: `Bearer ${Cookies.get("token")}`,
+        },
+        body: formData,
     });
+    const data = await res.json();
+    if (data.success) {
+        return data.url;
+    }
+    throw new Error(data.message || "Upload failed");
 }
 
 const initFormData = {
@@ -81,14 +60,20 @@ export default function AdminAddNewProduct() {
     }, [currentUpdatedProduct])
 
     async function handleImage(event) {
-        const extractImageUrl = await helperForUploadingImageToFirebase(
-            event.target.files[0]
-        )
-        if (extractImageUrl) {
-            setFormData({
-                ...formData,
-                imageUrl: extractImageUrl
-            })
+        try {
+            const extractImageUrl = await uploadImageToCloudinary(
+                event.target.files[0]
+            );
+            if (extractImageUrl) {
+                setFormData({
+                    ...formData,
+                    imageUrl: extractImageUrl
+                });
+            }
+        } catch (error) {
+            toast.error("Image upload failed. Please try again.", {
+                position: "top-right",
+            });
         }
     }
     console.log({ formData });

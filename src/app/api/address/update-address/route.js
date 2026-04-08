@@ -14,6 +14,14 @@ export async function PUT(req) {
       const data = await req.json();
       const { _id, fullName, city, address, country, postalCode } = data;
 
+      const existingAddress = await Address.findById(_id);
+      if (!existingAddress || existingAddress.userID.toString() !== isAuthUser.id) {
+        return NextResponse.json({
+          success: false,
+          message: "You are not authorized to update this address",
+        });
+      }
+
       const updateAddress = await Address.findOneAndUpdate(
         {
           _id: _id,

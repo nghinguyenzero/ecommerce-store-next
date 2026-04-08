@@ -21,6 +21,13 @@ export async function DELETE(req) {
     const isAuthUser = await AuthUser(req);
 
     if (isAuthUser) {
+      const addressToDelete = await Address.findById(id);
+      if (!addressToDelete || addressToDelete.userID.toString() !== isAuthUser.id) {
+        return NextResponse.json({
+          success: false,
+          message: "You are not authorized to delete this address",
+        });
+      }
       const deletedAddress = await Address.findByIdAndDelete(id);
 
       if (deletedAddress) {

@@ -22,6 +22,12 @@ export async function GET(req) {
     const isAuthUser = await AuthUser(req);
 
     if (isAuthUser) {
+      if (isAuthUser.id !== id) {
+        return NextResponse.json({
+          success: false,
+          message: "You can only access your own addresses",
+        });
+      }
       const getAllAddresses = await Address.find({ userID: id });
 
       if (getAllAddresses) {

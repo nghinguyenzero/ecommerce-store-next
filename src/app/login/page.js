@@ -17,10 +17,6 @@ const initFormData = {
 
 export default function Login() {
   const [formData, setFormData] = useState(initFormData);
-  console.log('HOST_URL');
-  console.log(process.env.API_KEY);
-
-
 
   const {
     isAuthUser, setIsAuthUser,
