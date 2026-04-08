@@ -28,12 +28,12 @@ export default function ProductButton({ item }) {
     if (res.success) {
       setComponentLevelLoader({ loading: false, id: "" });
       toast.success(res.message, {
-        position: toast.POSITION.TOP_RIGHT,
+        position: "top-right",
       });
       router.refresh();
     } else {
       toast.error(res.message, {
-        position: toast.POSITION.TOP_RIGHT,
+        position: "top-right",
       });
       setComponentLevelLoader({ loading: false, id: "" });
     }
@@ -46,13 +46,13 @@ export default function ProductButton({ item }) {
 
     if (res.success) {
       toast.success(res.message, {
-        position: toast.POSITION.TOP_RIGHT,
+        position: "top-right",
       });
       setComponentLevelLoader({ loading: false, id: "" });
       setShowCartModal(true);
     } else {
       toast.error(res.message, {
-        position: toast.POSITION.TOP_RIGHT,
+        position: "top-right",
       });
       setComponentLevelLoader({ loading: false, id: "" });
       setShowCartModal(true)

@@ -59,7 +59,7 @@ export default function Account() {
     if (res.success) {
       setComponentLevelLoader({ loading: false, id: "" });
       toast.success(res.message, {
-        position: toast.POSITION.TOP_RIGHT,
+        position: "top-right",
       });
       setAddressFormData({
         fullName: "",
@@ -73,7 +73,7 @@ export default function Account() {
     } else {
       setComponentLevelLoader({ loading: false, id: "" });
       toast.error(res.message, {
-        position: toast.POSITION.TOP_RIGHT,
+        position: "top-right",
       });
       setAddressFormData({
         fullName: "",
@@ -106,14 +106,14 @@ export default function Account() {
       setComponentLevelLoader({ loading: false, id: "" });
 
       toast.success(res.message, {
-        position: toast.POSITION.TOP_RIGHT,
+        position: "top-right",
       });
       extractAllAddresses();
     } else {
       setComponentLevelLoader({ loading: false, id: "" });
 
       toast.error(res.message, {
-        position: toast.POSITION.TOP_RIGHT,
+        position: "top-right",
       });
     }
   }

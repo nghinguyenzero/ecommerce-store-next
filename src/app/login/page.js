@@ -42,7 +42,7 @@ export default function Login() {
     console.log({res});
     if(res.success) {
         toast.success(res.message, {
-          position: toast.POSITION.TOP_RIGHT,
+          position: "top-right",
         });
         setIsAuthUser(true)
         setUser(res?.finalData?.user)
@@ -53,7 +53,7 @@ export default function Login() {
 
     }else {
       toast.error(res.message, {
-        position: toast.POSITION.TOP_RIGHT,
+        position: "top-right",
       });
       setIsAuthUser(false)
       setComponentLevelLoader({loading: false, id: ''})

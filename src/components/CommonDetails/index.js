@@ -1,7 +1,9 @@
 "use client";
 
 import { GlobalContext } from "@/context";
+import { addToCart } from "@/services/cart";
 import { useContext } from "react";
+import { toast } from "react-toastify";
 import ComponentLevelLoader from "../Loader/ComponentLevelLoader";
 import Notification from "../Notification";
 
@@ -20,13 +22,13 @@ export default function CommonDetails({ item }) {
 
     if (res.success) {
       toast.success(res.message, {
-        position: toast.POSITION.TOP_RIGHT,
+        position: "top-right",
       });
       setComponentLevelLoader({ loading: false, id: "" });
       setShowCartModal(true);
     } else {
       toast.error(res.message, {
-        position: toast.POSITION.TOP_RIGHT,
+        position: "top-right",
       });
       setComponentLevelLoader({ loading: false, id: "" });
       setShowCartModal(true);

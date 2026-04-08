@@ -7,11 +7,11 @@ import { createNewOrder } from "@/services/order";
 import { callStripeSession } from "@/services/stripe";
 import { loadStripe } from "@stripe/stripe-js";
 import { useRouter, useSearchParams } from "next/navigation";
-import { useContext, useEffect, useState } from "react";
+import { Suspense, useContext, useEffect, useState } from "react";
 import { PulseLoader } from "react-spinners";
 import { toast } from "react-toastify";
 
-export default function Checkout() {
+function CheckoutContent() {
   const {
     cartItems,
     user,
@@ -80,13 +80,13 @@ export default function Checkout() {
           setIsOrderProcessing(false);
           setOrderSuccess(true);
           toast.success(res.message, {
-            position: toast.POSITION.TOP_RIGHT,
+            position: "top-right",
           });
         } else {
           setIsOrderProcessing(false);
           setOrderSuccess(false);
           toast.error(res.message, {
-            position: toast.POSITION.TOP_RIGHT,
+            position: "top-right",
           });
         }
       }
@@ -306,5 +306,17 @@ export default function Checkout() {
       </div>
       <Notification/>
     </div>
+  );
+}
+
+export default function Checkout() {
+  return (
+    <Suspense fallback={
+      <div className="w-full min-h-screen flex justify-center items-center">
+        <PulseLoader color={"#000000"} loading={true} size={30} />
+      </div>
+    }>
+      <CheckoutContent />
+    </Suspense>
   );
 }
