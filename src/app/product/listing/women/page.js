@@ -1,5 +1,5 @@
 import CommonListing from "@/components/CommonListing";
-import { productByCategory } from "@/services/product";
+import { productByCategoryDirect } from "@/services/product/server";
 
 export const dynamic = "force-dynamic";
 
@@ -10,7 +10,7 @@ export const metadata = {
 
 export default async function WomenAllProducts() {
   
-  const getAllProducts = await productByCategory("women");
+  const getAllProducts = await productByCategoryDirect("women");
 
   return <CommonListing data={getAllProducts && getAllProducts.data} />;
 }

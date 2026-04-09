@@ -44,7 +44,7 @@ export const getOrderDetails = async (id) => {
 
 export const getAllOrdersForAllUsers = async () => {
   try {
-    const res = await fetch(`/api/admin/orders/get-all-orders`, {
+    const res = await fetch(`/api/admin/order/get-all-orders`, {
       method: "GET",
       headers: {
         Authorization: `Bearer ${Cookies.get("token")}`,
@@ -57,7 +57,7 @@ export const getAllOrdersForAllUsers = async () => {
 
 export const updateStatusOfOrder = async (formData) => {
   try {
-    const res = await fetch(`/api/admin/orders/update-order`, {
+    const res = await fetch(`/api/admin/order/update-order`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",

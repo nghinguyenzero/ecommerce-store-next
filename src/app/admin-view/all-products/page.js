@@ -1,4 +1,4 @@
-import { getAllAdminProducts } from "@/services/product";
+import { getAllProductsDirect } from "@/services/product/server";
 import CommListing from "@/components/CommonListing";
 
 export const dynamic = "force-dynamic";
@@ -9,7 +9,7 @@ export const metadata = {
 };
 
 export default async function AdminAllProducts() {
-    const allAdminProducts = await getAllAdminProducts()
+    const allAdminProducts = await getAllProductsDirect()
     return ( 
         <CommListing 
             data={allAdminProducts && allAdminProducts.data}

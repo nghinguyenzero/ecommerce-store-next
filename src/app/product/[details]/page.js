@@ -1,11 +1,11 @@
 import CommonDetails from "@/components/CommonDetails";
-import { productById } from "@/services/product";
+import { productByIdDirect } from "@/services/product/server";
 
 export const dynamic = "force-dynamic";
 
 export async function generateMetadata({ params }) {
   const { details } = await params;
-  const res = await productById(details);
+  const res = await productByIdDirect(details);
   const product = res?.data;
 
   if (!product) {
@@ -25,7 +25,7 @@ export async function generateMetadata({ params }) {
 
 export default async function ProductDetails({ params }) {
   const { details } = await params;
-  const productDetailsData = await productById(details);
+  const productDetailsData = await productByIdDirect(details);
 
   return <CommonDetails item={productDetailsData && productDetailsData.data} />;
 }
